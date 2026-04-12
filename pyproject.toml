@@ -1,0 +1,28 @@
+[project]
+name = "medalert"
+version = "1.0.0"
+description = "Aplicação CLI para controle de medicamentos para idosos"
+authors = [
+    { name = "Rafael William Dantas Quintiliano" }
+]
+dependencies = [
+    "pytest>=8.0.0",
+    "ruff>=0.3.0"
+]
+requires-python = ">=3.8"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 88
+target-version = "py38"
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "."
+]
+testpaths = [
+    "tests",
+]
