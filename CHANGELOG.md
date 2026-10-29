@@ -5,6 +5,18 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [1.1.0] - 2026-10-29
+
+### Alterado
+- Validação de horário reescrita sem `datetime`, aceitando apenas `HH:MM` entre 00:00 e 23:59.
+- Dependências de desenvolvimento (pytest e Ruff) movidas para o grupo opcional `dev`.
+- Regras do Ruff definidas no `pyproject.toml`, com formatação verificada no CI.
+- CI atualizado para `actions/checkout@v4` e `actions/setup-python@v5`, rodando em Python 3.10, 3.11 e 3.12.
+- README reorganizado, com exemplo de uso e próximos passos.
+
+### Adicionado
+- Testes parametrizados para horários inválidos (10 testes no total).
+
 ## [1.0.0] - 2025-04-12
 
 ### Adicionado

@@ -1,6 +1,14 @@
 import os
+
 import pytest
-from src.main import adicionar_medicamento, listar_medicamentos, remover_medicamento, DATA_FILE
+
+from src.main import (
+    DATA_FILE,
+    adicionar_medicamento,
+    listar_medicamentos,
+    remover_medicamento,
+)
+
 
 @pytest.fixture(autouse=True)
 def setup_teardown():
@@ -12,31 +20,42 @@ def setup_teardown():
     if os.path.exists(DATA_FILE):
         os.remove(DATA_FILE)
 
+
 def test_adicionar_medicamento_sucesso():
     med = adicionar_medicamento("Aspirina", "1 comprimido", "08:00")
     assert med["nome"] == "Aspirina"
     assert med["dosagem"] == "1 comprimido"
     assert med["horario"] == "08:00"
-    
+
     dados = listar_medicamentos()
     assert len(dados) == 1
     assert dados[0]["nome"] == "Aspirina"
+
 
 def test_adicionar_medicamento_horario_invalido():
     with pytest.raises(ValueError, match="Horário inválido"):
         adicionar_medicamento("Aspirina", "1 comprimido", "25:00")
 
+
 def test_adicionar_medicamento_campos_vazios():
     with pytest.raises(ValueError, match="Todos os campos são obrigatórios"):
         adicionar_medicamento("", "1 comprimido", "08:00")
 
+
 def test_remover_medicamento_sucesso():
     med = adicionar_medicamento("Aspirina", "1 comprimido", "08:00")
     assert len(listar_medicamentos()) == 1
-    
+
     remover_medicamento(med["id"])
     assert len(listar_medicamentos()) == 0
+
 
 def test_remover_medicamento_inexistente():
     with pytest.raises(ValueError, match="Medicamento não encontrado"):
         remover_medicamento(999)
+
+
+@pytest.mark.parametrize("horario", ["8:00", "08:60", "24:00", "ab:cd", "0800"])
+def test_validar_horario_invalido(horario):
+    with pytest.raises(ValueError):
+        adicionar_medicamento("Aspirina", "1 comprimido", horario)

@@ -1,76 +1,100 @@
-# MedAlert - Controle de Medicamentos para Idosos
+# 💊 MedAlert
 
-![Build Status](https://github.com/RafaelWilliam2808/medalert/actions/workflows/ci.yml/badge.svg)
+[![CI](https://github.com/RafaelWilliam2808/medalert/actions/workflows/ci.yml/badge.svg)](https://github.com/RafaelWilliam2808/medalert/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/Python-3.10%20|%203.11%20|%203.12-3776AB?logo=python&logoColor=white)
+![Ruff](https://img.shields.io/badge/lint-Ruff-D7FF64?logo=ruff&logoColor=black)
+![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-green)
 
-## 🎯 O Problema
-Muitos idosos e seus cuidadores enfrentam dificuldades em organizar e lembrar os horários corretos para a administração de medicamentos. O esquecimento ou a dosagem incorreta pode levar a sérios problemas de saúde, internações evitáveis e perda de qualidade de vida.
+Aplicação de linha de comando para **idosos e cuidadores** registrarem e consultarem os medicamentos do dia: nome, dosagem e horário.
 
-## 💡 A Solução
-O **MedAlert** é uma aplicação de Interface de Linha de Comando (CLI) simples e direta, desenvolvida para ajudar idosos e cuidadores a registrar e consultar os medicamentos que precisam ser tomados ao longo do dia. A aplicação permite cadastrar o nome do remédio, a dosagem e o horário, além de listar e remover medicamentos já concluídos ou suspensos.
+## 🎯 O problema
 
-## 👥 Público-Alvo
-- Idosos que gerenciam sua própria medicação e têm familiaridade básica com computadores.
-- Cuidadores familiares ou profissionais que precisam de um registro rápido e confiável.
+Esquecer um remédio ou tomar a dose errada pode causar internações evitáveis e perda de qualidade de vida. Para quem toma vários medicamentos por dia, ou cuida de alguém que toma, manter tudo organizado não é simples.
 
-## ✨ Funcionalidades Principais
-- **Adicionar Medicamento**: Registra nome, dosagem e horário (formato HH:MM).
-- **Listar Medicamentos**: Exibe todos os medicamentos cadastrados de forma clara.
-- **Remover Medicamento**: Permite excluir um medicamento pelo seu ID.
+## 💡 A solução
 
-## 🛠️ Tecnologias Utilizadas
-- **Linguagem**: Python 3.8+
-- **Armazenamento**: Arquivo local JSON (`medicamentos.json`)
-- **Testes**: `pytest`
-- **Linting/Análise Estática**: `ruff`
-- **CI/CD**: GitHub Actions
+O MedAlert oferece um menu simples para:
 
-## 🚀 Instruções de Instalação
+- **Adicionar** um medicamento com nome, dosagem e horário (`HH:MM`, validado)
+- **Listar** todos os medicamentos cadastrados
+- **Remover** um medicamento concluído ou suspenso
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/RafaelWilliam2808/medalert.git
-   cd medalert
-   ```
+Os dados ficam salvos em um arquivo JSON local e não se perdem ao fechar o programa.
 
-2. Crie um ambiente virtual (opcional, mas recomendado):
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # No Windows: venv\Scripts\activate
-   ```
+## 🖥️ Exemplo de uso
 
-3. Instale as dependências:
-   ```bash
-   pip install -e .
-   ```
+```text
+=== MedAlert: Controle de Medicamentos para Idosos ===
+1. Adicionar Medicamento
+2. Listar Medicamentos
+3. Remover Medicamento
+4. Sair
+======================================================
+Escolha uma opção: 2
 
-## 💻 Instruções de Execução
+--- Lista de Medicamentos ---
+[1] Losartana - 1 comprimido (50 mg) às 08:00
+[2] Metformina - 1 comprimido (500 mg) às 20:00
+-----------------------------
+```
 
-Para iniciar a aplicação, execute o arquivo principal:
+## 🛠️ Tecnologias e práticas
+
+| Área | Ferramenta |
+|---|---|
+| Linguagem | Python 3.10+ |
+| Persistência | Arquivo JSON local |
+| Testes | pytest (10 testes, incluindo casos de erro) |
+| Lint e formatação | Ruff |
+| Integração contínua | GitHub Actions, rodando em Python 3.10, 3.11 e 3.12 a cada push |
+| Versionamento | Versionamento semântico (veja o [CHANGELOG](CHANGELOG.md)) |
+
+## 📁 Estrutura
+
+```text
+medalert/
+├── src/
+│   └── main.py          # Regras de negócio e menu interativo
+├── tests/
+│   └── test_main.py     # Testes automatizados
+├── .github/workflows/
+│   └── ci.yml           # Pipeline de lint e testes
+└── pyproject.toml       # Dependências e configuração do Ruff e do pytest
+```
+
+## 🚀 Como rodar
+
 ```bash
+git clone https://github.com/RafaelWilliam2808/medalert.git
+cd medalert
+
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+
+pip install -e ".[dev]"
 python src/main.py
 ```
 
-Siga as instruções no menu interativo na tela.
+## 🧪 Testes e lint
 
-## 🧪 Instruções para Rodar os Testes
-
-A aplicação possui testes automatizados para garantir o funcionamento correto das regras de negócio. Para executá-los:
 ```bash
-pytest tests/
+pytest -v                        # testes
+ruff check src/ tests/           # lint
+ruff format --check src/ tests/  # formatação
 ```
 
-## 🧹 Instruções para Rodar o Lint
+## 🗺️ Próximos passos
 
-Para verificar a qualidade e padronização do código usando o Ruff:
-```bash
-ruff check src/ tests/
-```
+- [ ] API REST para os medicamentos
+- [ ] Interface web responsiva, pensada para uso por idosos
+- [ ] Banco de dados no lugar do arquivo JSON
+- [ ] Lembretes no horário de cada medicamento
 
-## 📦 Versão Atual
-**1.0.0** (Versionamento Semântico MAJOR.MINOR.PATCH)
+## 👤 Autor
 
-## ✍️ Autor
-**Rafael William Dantas Quintiliano**
+**Rafael William Dantas Quintiliano**, estudante de Engenharia de Software no CEUB
 
-## 🔗 Link do Repositório Público
-[https://github.com/RafaelWilliam2808/medalert](https://github.com/RafaelWilliam2808/medalert)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rafael-william-5190b33a8/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/RafaelWilliam2808)
+
+Distribuído sob a licença MIT. Veja [LICENSE](LICENSE).
